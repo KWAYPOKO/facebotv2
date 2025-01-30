@@ -44,7 +44,7 @@ class Greeg(Client):
   async def onListening(self):
     print("\033[32m[BOT] \033[0mListening...")
     await self._botEvent('type:listening', isOnline=True)
-    self.weblog("Listening...", "BOT", "green")
+    self.logMessage("Listening...", "BOT", "green")
     print()
   
   """CUSTOM METHOD"""
@@ -70,16 +70,14 @@ class Greeg(Client):
     self.events = loadEvents(isReload=True)
     self.logInfo("Modules has been reloaded", title="Modules", border="yellow")
   
-  def weblog(self, message, label=None, color="#4477CE"):
-    _data = {
-      "message": str(message) if not isinstance(message, dict) else message,
-      "label": {
-        "text": label,
-        "color": color
-      }
-    }
+  def weblog(self, _data):
     datos.logs.append(_data)
-    datos.socket.emit('log', _data)
+    datos.socket.emit('log',_data)
+  def logMessage(self, message, label=None, color="#4477CE"):
+    self.weblog({
+      "message": str(message),
+      "label": {"text":label,"color": color}
+    })
   
   """MESSAGE EVENTS"""
   async def onReply(self, **kwargs):
@@ -141,21 +139,21 @@ async def main():
       "commands": len(bot.commands)#[key for key,_ in bot.commands.items()]
     }
     print(f"\033[32m[BOT] \033[0m{bot_info.name} is now logged in")
-    bot.weblog(f"{bot_info.name} is now logged in", "BOT", "green")
+    bot.logMessage(f"{bot_info.name} is now logged in", "BOT", "green")
   try:
     await bot.listen()
   except FBchatException as g:
     stopbot() # <--
-    bot.weblog(f"{g}", "ERROR", "red")
+    bot.logMessage(f"{g}", "ERROR", "red")
     bot.error("{}".format(g), title="FBchatException")
   except FBchatFacebookError as g:
     stopbot() # <--
-    bot.weblog(f"{g}", "ERROR", "red")
+    bot.logMessage(f"{g}", "ERROR", "red")
     bot.error("{}".format(g), title="FBchatFacebookError")
   except Exception as e:
     stopbot() # <--
     bot.error(f"An error occured while trying to login, please check your bot account or get a new fbstate.\n\n{e}", title="Exception")
-    bot.weblog(f"An error occured while trying to login, please check your bot account or get a new fbstate.\n\n{e}", "BOT", "red")
+    bot.logMessage(f"An error occured while trying to login, please check your bot account or get a new fbstate.\n\n{e}", "BOT", "red")
 
 def stopbot():
   global bot_running

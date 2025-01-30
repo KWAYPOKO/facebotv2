@@ -15,8 +15,13 @@ def loadEvents(isReload=False, log=None):
   
   def Log(message, isError=False):
     if log:
-      log(message, "EVENT", "#0A5EB0" if not isError else 'red')
-  
+      log({
+        "message": message,
+        "label": {
+          "text": "EVENTS",
+          "color": "#0A5EB0" if not isError else "red"
+        }
+      })
   console = Console()
   files = list(filter(lambda file: file.endswith('.py') and
   file!='__init__.py',os.listdir('./events')))
@@ -44,7 +49,7 @@ def loadEvents(isReload=False, log=None):
         else:
           config["event"] = config["event"].lower()
           events.append(config)
-          Log(f"Loaded <span color='#FEEE91'>{file}</span>")
+          Log(f"Loaded <span style='color:#FEEE91'>{file}</span>")
           message += f"[blue]EVENT[/blue] Loaded [yellow]{file}[/yellow]\n"
   panel = Panel(message[:-1], title="EVENTS", border_style="royal_blue1")
   console.print(panel)

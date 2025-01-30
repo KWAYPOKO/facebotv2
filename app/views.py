@@ -18,7 +18,7 @@ def root():
 
 @view.route('/admin/log')
 def admin_log():
-  return render_template('admin/log.html', session=datos.log_session), 200
+  return render_template('admin/log.html', session=datos.log_session, show_eruda=True), 200
 
 @view.route('/admin/login', methods=['GET','POST'])
 def admin_login():

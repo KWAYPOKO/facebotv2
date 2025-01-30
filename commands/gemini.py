@@ -5,12 +5,11 @@ async def gemini(bot, event):
     event.font(":mono[No prompt provided]")
   )
   try:
-    res = requests.get(f"https://api.joshweb.click/gemini?prompt={event.args.replace(' ','+')}").json()
+    res = requests.get(f"https://api.zetsu.xyz/gemini?prompt={event.args.replace(' ','+')}").json()
     if 'error' in res:
       return await event.sendReply(event.font(f":mono[{res['error']}]"))
     await event.sendReply(event.font(
-      ":bold[GEMINI]\n"
-      f"{event.line}\n"
+      ":bold[GEMINI]\n\n"
       f"{res['gemini']}"
     ))
   except Exception as e:

@@ -41,9 +41,28 @@ li{
   border-bottom: 1px solid #4a4a54;
   color: #16d6c1;
 }
-.user .body{
-  padding: 5px;
-}
+.user .body{padding: 5px}
 .user .body b{color: #e3e3e3 !important}
 .user .body span{color: #cecccc}
 .user .body span.command{color: #ead828}
+
+.info{
+  background: #232323;
+  border: 1px solid #930ed3;
+  border-radius: 8px;
+  margin: 3px 0;
+  padding-bottom: 2px;
+}
+.info .head{
+  padding: 0 7px;
+  padding-top:3px;
+  font-size: 10px;
+  color: #b33cec;
+}
+.info .data{
+  font-size: 11px;
+  padding: 0 7px;
+  padding-bottom: 2px;
+  color: #cecccc;
+}
+.info p{margin:0!important}

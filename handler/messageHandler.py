@@ -82,17 +82,17 @@ async def handleMessage(bot, **kwargs):
         mtg += f"[blue]UID      : [/blue] {author_id}\n"
         mtg += f"[blue]Command  : [/blue] [yellow]{cnp}[/yellow]"
         bot.logInfo(mtg, title=f"{thread_id}")
-        bot.weblog(
-          {"user": {
-            "name": sender,
-            "uid": author_id,
-            "threadId": thread_id,
-            "command": cnp
-          }},
-          sender,
-          "#03C988"
-        )
+        bot.weblog({
+          "type": 'user',
+          "name": sender,
+          "uid": author_id,
+          "threadId": thread_id,
+          "command": cnp
+        })
         return await function['def'](bot, message_data)
+    else:
+      if bot.prefix != "" and message.startswith(bot.prefix):
+        await bot.sendMessage(f"Command '{cnp}' does not exist, type '{bot.prefix}help' to view commands", thread_id, thread_type, reply_to_id=kwargs['mid'])
   except bot.FBchatFacebookError as err:
     bot.weblog(f"{err}", 'FBchatFacebookError', 'red')
     bot.error(f"{err}", 'FBchatFacebookError')
