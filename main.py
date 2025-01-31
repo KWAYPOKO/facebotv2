@@ -41,6 +41,11 @@ class Greeg(Client):
     # console
     self.console = Console()
     self.panel = Panel
+    # clayent sayd
+    self.colorPanel = {
+      "error": {"#8E1616", "#D84040"},
+      "success": {"#21BF73", "#4AA96C"}
+    }
   async def onListening(self):
     print("\033[32m[BOT] \033[0mListening...")
     await self._botEvent('type:listening', isOnline=True)
@@ -77,6 +82,17 @@ class Greeg(Client):
     self.weblog({
       "message": str(message),
       "label": {"text":label,"color": color}
+    })
+  def weblog_error(self, message, lable="ERROR"):
+    self.weblog({
+      "type": "info",
+      "body": str(message),
+      "border": self.colors['error'][1],
+      "label": {
+        "text": str(label),
+        "color": self.colors['error'][0],
+        "icon": "fa-solid fa-circle-exclamation"
+      }
     })
   
   """MESSAGE EVENTS"""
@@ -135,8 +151,8 @@ async def main():
       "prefix": bot.prefix or 'No prefix',
       "owner": bot.owner,
       "admins": ', '.join(bot.admin),
-      "events": len(bot.events),#[key for event in bot.events for key in event],
-      "commands": len(bot.commands)#[key for key,_ in bot.commands.items()]
+      "events": len(bot.events),
+      "commands": len(bot.commands)
     }
     print(f"\033[32m[BOT] \033[0m{bot_info.name} is now logged in")
     bot.logMessage(f"{bot_info.name} is now logged in", "BOT", "green")

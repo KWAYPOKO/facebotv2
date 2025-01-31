@@ -29,7 +29,8 @@ async def function(bot, event):
     )
     await bot.unsend(loading)
   except Exception as e:
-    print(f"\033[91m[ERROR] \033[0m{e}")
+    bot.weblog_error(e, "SHOTI.PY")
+    bot.error(f"{e}", "shoti.py")
     await event.sendReply(event.font(f":mono[{e}]"))
 
 

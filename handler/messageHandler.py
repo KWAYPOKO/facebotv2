@@ -2,7 +2,7 @@ from database import Users, User
 from util import text_formatter, getName
 import os
 
-async def get_name(fetchName, uid):
+async def get_name(fetchName, uid, log):
   try:
     users = Users()
     userX = users.get(uid)
@@ -11,13 +11,27 @@ async def get_name(fetchName, uid):
         return userX.get('name')
     else:
       nameX = getName(uid)
+      Jj = {
+        "type": 'info',
+        "border": "#4AA96C",
+        "body": '',
+        "label": {
+          "text": "DATABASE",
+          "color": "#21BF73",
+          "icon": "fa-solid fa-database"
+        }
+      }
       if nameX != 'Facebook User':
         users.add(uid, nameX)
+        Jj["body"] = f"New user - <b>{nameX}</b>\n<b>UID: </b>{uid}"
+        log(Jj)
         return nameX
       fetch = await fetchName(uid)
       tao = fetch.get(uid)
       name = tao.name
       users.add(uid, name)
+      Jj["body"] = f"New user - <b>{name}</b>\n<b>UID: </b>{uid}"
+      log(Jj)
       return name
   except Exception as e:
     print(e)
@@ -45,7 +59,7 @@ class MessageData:
     if self.message_object.replied_to:
       self.reply = self.message_object.replied_to
   async def getName(self, uid):
-    name = await get_name(self.bot.fetchUserInfo, uid)
+    name = await get_name(self.bot.fetchUserInfo, uid, self.bot.weblog)
     return name
   async def sendReply(self, message, auto_font=False, mentions=None):
     text = self.font(message) if auto_font else message
@@ -70,7 +84,7 @@ async def handleMessage(bot, **kwargs):
       elif is_admin_only and str(author_id) not in bot.admin:
         return await bot.sendMessage(text_formatter(":mono[You dont have permission to use this command.]"), thread_id, thread_type)
       else:
-        sender = await get_name(bot.fetchUserInfo, author_id)
+        sender = await get_name(bot.fetchUserInfo, author_id, bot.weblog)
         message_data = MessageData(
           cmd = cnp,
           args = args,
@@ -91,8 +105,9 @@ async def handleMessage(bot, **kwargs):
         })
         return await function['def'](bot, message_data)
     else:
-      if bot.prefix != "" and message.startswith(bot.prefix):
-        await bot.sendMessage(f"Command '{cnp}' does not exist, type '{bot.prefix}help' to view commands", thread_id, thread_type, reply_to_id=kwargs['mid'])
+      if message:
+        if bot.prefix != "" and message.startswith(bot.prefix):
+          await bot.sendMessage(f"Command '{cnp}' does not exist, type '{bot.prefix}help' to view commands", thread_id, thread_type, reply_to_id=kwargs['mid'])
   except bot.FBchatFacebookError as err:
     bot.weblog(f"{err}", 'FBchatFacebookError', 'red')
     bot.error(f"{err}", 'FBchatFacebookError')
