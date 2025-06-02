@@ -13,9 +13,22 @@ config = json.load(open('config.json', 'r'))
 view = Blueprint('view',__name__)
 
 @view.route('/')
+@view.route('/home')
 def root():
-  return render_template('home.html', title="Update BOT", bot=datos.BOT),200
+  example = {
+    "name": "Pampot Jekoy",
+    "owner": "Christopher",
+    "admins": ["Christopher Jr.", "Astro Ksks"],
+    "commands": ["help", "uid", "shoti", "kick", "admins", "hack"],
+    "events": ["joinNoti.py", "walalang.py"]
+  }
+  return render_template('home.html',
+    title="Facebot | home",
+    show_eruda=True,
+    bot=example
+  ),200
 
+# Admin
 @view.route('/admin/log')
 def admin_log():
   return render_template('admin/log.html', session=datos.log_session, show_eruda=True), 200

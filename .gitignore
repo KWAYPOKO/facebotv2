@@ -3,8 +3,10 @@ __pycache__/
 
 *.pyc
 
+test.py
 _test.py
 fbstate.json
+output.png
 
 database.db-shm
 database.db-wal

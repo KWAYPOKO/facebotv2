@@ -1,0 +1,35 @@
+header{
+  background: var(--b2);
+  padding: 10px !important;
+  box-shadow: 0 1px 10px #979797;
+  display: flex;
+  justify-content: space-between;
+}
+header h1{
+  color: var(--b4);
+  margin-bottom: 0 !important;
+  font-weight: 410;
+  font-size: 23px;
+}
+header h1 span{
+  font-size: 12px;
+  padding: 2px 6px;
+  color: var(--b6);
+  border-radius: 20px;
+  border: 1px solid var(--b3);
+}
+
+#repository{
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  background: black;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--b3);
+  border-radius: 50%;
+  &:hover{
+    background: #333030;
+  }
+}

@@ -191,11 +191,11 @@ if __name__ == '__main__':
   
   threading.Thread(target=startbot).start()
   
-  socket.run(
-    app,
-    host='0.0.0.0',
-    port=PORT,
-    debug=False,
-    allow_unsafe_werkzeug=True
-  )
-  #app.run(debug=True, host='0.0.0.0', port=PORT)
+  #socket.run(
+  #  app,
+  #  host='0.0.0.0',
+  #  port=PORT,
+  #  debug=True,
+  #  allow_unsafe_werkzeug=True
+  #)
+  app.run(debug=False, host='0.0.0.0', port=PORT)

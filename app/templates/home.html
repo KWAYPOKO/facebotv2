@@ -2,37 +2,35 @@
 
 {% block jss %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 {% endblock %}
 
 {% block content %}
+  {% include 'sex/header.html' %}
   <div class="container mt-3">
-    {% if bot %}
-    <div class="alert alert-primary" role='alert'>
-      <b>NAME: </b>{{ bot.name }}<br>
-      <b>UID: </b>{{ bot.uid }}<br>
-      <b>OWNER: </b>{{ bot.owner }}<br>
-      <b>PREFIX: </b>{{ bot.prefix }}<br>
-      <b>ADMINS: </b>{{ bot.admins }}<br>
-      <b>EVENTS: </b>{{ bot.events }}<br>
-      <b>COMMANDS: </b>{{ bot.commands }}<br>
+    
+  <div class="card border-secondary">
+    <div class="card-header bg-b3 txt-b1">
+      <b><i class="fa-solid fa-robot"></i> BOT STATUS</b>
     </div>
-    {% else %}
-    <div class="alert alert-danger" role='alert'>
-      Bot is not online
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>Name:     </b> Pampot Jekoy</li>
+      <li class="list-group-item"><b>Prefix:   </b> /</li>
+      <li class="list-group-item"><b>Owner:    </b> Christopher</li>
+      <li class="list-group-item">
+        <b>Admins: </b> <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Show Admins</button>
+      </li>
+      <li class="list-group-item">
+        <b>Commands: </b> <button type="button" class="btn btn-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Show Commands</button>
+      </li>
+      <li class="list-group-item">
+        <b>Events: </b> <button type="button" class="btn btn-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Show Events</button>
+      </li>
+    </ul>
+    <div class="card-footer">
+      <small class="text-body-secondary">Developed by Greegmon <i class="fa-solid fa-heart"></i></small>
     </div>
-    {% endif %}
-    <form class="form-control" method="POST" action="/api/bobot">
-      <div class="form-group">
-        <label for="appstate">Bot fbstate</label>
-        <textarea class="form-control" id="fbstate" rows="6" name="fbstate" required></textarea>
-      </div>
-      <div class="form-group text-center">
-        {% if bot %}
-          <button class="btn btn-primary my-2" disabled>EXECUTE</button>
-        {% else %}
-          <button class="btn btn-primary my-2" type="submit">EXECUTE</button>
-        {% endif %}
-      </div>
-    </form>
+  </div>
+    
   </div>
 {% endblock %}
