@@ -146,11 +146,11 @@ async def main():
     kol = await loadConfig(bot_info.name)
     bot.BOT(kol)
     datos.BOT = {
-      "uid": bot.uid,
-      "name": bot.name,
-      "prefix": bot.prefix or 'No prefix',
-      "owner": bot.owner,
-      "admins": ', '.join(bot.admin),
+      "uid": 61577072600198,
+      "name": 'DonG Ai',
+      "prefix": 'No prefix',
+      "owner": 'Andrei Dsoyo',
+      "admins": '61576862427660, '.join(bot.admin),
       "events": len(bot.events),
       "commands": len(bot.commands)
     }
