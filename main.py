@@ -146,14 +146,14 @@ async def main():
     kol = await loadConfig(bot_info.name)
     bot.BOT(kol)
     datos.BOT = {
-      "uid": 61577072600198,
-      "name": 'DonG Ai',
-      "prefix": 'No prefix',
-      "owner": 'Andrei Dsoyo',
-      "admins": '61576862427660, '.join(bot.admin),
-      "events": len(bot.events),
-      "commands": len(bot.commands)
-    }
+     "uid": bot.uid,
+     "name": bot_info.name,
+     "prefix": bot.prefix,
+     "owner": kol['owner'],
+     "admins": ', '.join(bot.admin),
+     "events": len(bot.events),
+     "commands": len(bot.commands)
+   }
     print(f"\033[32m[BOT] \033[0m{bot_info.name} is now logged in")
     bot.logMessage(f"{bot_info.name} is now logged in", "BOT", "green")
   try:
