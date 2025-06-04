@@ -1,12 +1,12 @@
 {
-  "prefix": "/",
-  "botName": "GeegaBOT",
-  "owner": "Christopher Jr.",
+  "prefix": "",
+  "botName": "DonG Ai",
+  "owner": "Andrei Dsoyo.",
   "admin": [
-    "61571117768115",
-    "100040643049702"
+    "61576862427660",
+    ""
   ],
   "website": {
-    "admin_password": "greegmon"
+    "admin_password": "DonGustavByDsoyo"
   }
 }
