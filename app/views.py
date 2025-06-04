@@ -16,9 +16,9 @@ view = Blueprint('view',__name__)
 @view.route('/home')
 def root():
   example = {
-    "name": "Pampot Jekoy",
-    "owner": "Christopher",
-    "admins": ["Christopher Jr.", "Astro Ksks"],
+    "name": "FBBOT",
+    "owner": "Unknown",
+    "admins": ["Andrei Dsoyo."],
     "commands": ["help", "uid", "shoti", "kick", "admins", "hack"],
     "events": ["joinNoti.py", "walalang.py"]
   }
